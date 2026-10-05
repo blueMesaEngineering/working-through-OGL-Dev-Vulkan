@@ -22,6 +22,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "/home/nik/vulkanSDK/1.4.350.1/x86_64/include/vulkan/vulkan.h"
+//import vulkan.hpp;
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -41,7 +43,7 @@ void GLFW_KeyCallback(
 {
     if ((key == GLFW_KEY_ESCAPE) && (action == GLFW_PRESS))
     {
-        GLFWsETwINDOWsHOULDcLOSE(
+        glfwSetWindowShouldClose(
               window
             , GLFW_TRUE
         );
@@ -84,7 +86,7 @@ int main(
     if (!window)
     {
         glfwTerminate();
-        exti(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     glfwSetKeyCallback(
