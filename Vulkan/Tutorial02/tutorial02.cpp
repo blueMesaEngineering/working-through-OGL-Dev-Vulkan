@@ -15,23 +15,25 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-	Vulkan For Beginners - Tutorial #1 - Create a window
+	Vulkan For Beginners - 
+	* Tutorial #2: Create a Vulkan instance
+	* Tutorial #3: Validation layers
 */
 
-// Editor: NDG - Nathan Guthrie - 2026.10.05.18:20
+// Editor: NDG - Nathan Guthrie - 2026.10.09.15:54
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "/home/nik/vulkanSDK/1.4.350.1/x86_64/include/vulkan/vulkan.h"
-//import vulkan.hpp;
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include "ogldev_vulkan_core.h"
+
 #define WINDOW_WIDTH        1920
 #define WINDOW_HEIGHT       1080
 
-GLFWwindow*                 window                  = NULL;
 
 void GLFW_KeyCallback(
       GLFWwindow*           window
@@ -49,6 +51,39 @@ void GLFW_KeyCallback(
         );
     }
 }
+
+
+class VulkanApp
+{
+public:
+	
+	VulkanApp() : m_vkCore() // The NULL is here just for forward compatibility with tutorial #4
+	{
+	}
+	
+	~VulkanApp()
+	{
+	}
+	
+	void Init(const char* pAppName)
+	{
+		m_vkCore.Init(
+			pAppName
+			, NULL
+			, OgldevVK::OGLDEV_VK_INIT_NONE
+		); // The NULL is for forward compatibility with the following tutorials
+	}
+	
+	void RenderScene()
+	{
+	}
+	
+private:
+	OgldevVK::VulkanCore m_vkCore;
+};
+
+
+#define APP_NAME "Tutorial 02"
 
 int main(
       int                   argc
@@ -75,27 +110,31 @@ int main(
         , GL_FALSE
     );
     
-    window = glfwCreateWindow(
+    GLFWwindow* pWindow = glfwCreateWindow(
           WINDOW_WIDTH
         , WINDOW_HEIGHT
-        , "Tutorial 01"
+        , APP_NAME
         , NULL
         , NULL
     );
 
-    if (!window)
+    if (!pWindow)
     {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
 
     glfwSetKeyCallback(
-          window
+          pWindow
         , GLFW_KeyCallback
     );
 
-    while (!glfwWindowShouldClose(window))
+	VulkanApp App;
+	App.Init(APP_NAME);
+
+    while (!glfwWindowShouldClose(pWindow))
     {
+	App.RenderScene();
         glfwPollEvents();
     }
 
