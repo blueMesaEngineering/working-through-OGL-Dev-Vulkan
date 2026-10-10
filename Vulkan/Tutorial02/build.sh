@@ -5,7 +5,7 @@ source ../build.sh
 check_vulkan_sdk
 
 CC=g++
-CPPFLAGS="-I../VulkanCore/Include -I../../Include -I/home/nik/vulkanSDK/1.4.350.1/x86_64/include -DVULKAN -ggdb3 -std=c++20"
+CPPFLAGS="-std=c++20 -I../VulkanCore/Include -I../../Include -I../../Include/assimp5 -I/home/nik/vulkanSDK/1.4.350.1/x86_64/include -DVULKAN -ggdb3"
 LDFLAGS=`pkg-config --libs glfw3 vulkan`
 LDFLAGS="$LDFLAGS"
 
