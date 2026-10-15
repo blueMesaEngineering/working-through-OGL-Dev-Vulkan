@@ -21,5 +21,9 @@
 #include <vector>
 
 #include "bitmap.h"
+#include <algorithm>        // Included because g++ was throwing a fit about the clamp function not being a member of std, but rather perhaps a member of glm.
+                            //      So I included this here for my build of the Vulkan stuff.  Perhaps it is included in the build of OGLDev's entire build system
+                            //      in other files, but I am only building the Vulkan components for now, so I am troubleshooting corresponding errors accordingly.
+                            //      NDG 2026.10.15.19:43
 
 int ConvertEquirectangularImageToCubemap(const Bitmap& b, std::vector<Bitmap>& Cubemap);
