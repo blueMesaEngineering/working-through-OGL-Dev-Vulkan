@@ -68,7 +68,7 @@ public:
 	void Init(const char* pAppName)
 	{
 		m_vkCore.Init(
-			pAppName
+			  pAppName
 			, NULL
 			, OgldevVK::OGLDEV_VK_INIT_NONE
 		); // The NULL is for forward compatibility with the following tutorials
