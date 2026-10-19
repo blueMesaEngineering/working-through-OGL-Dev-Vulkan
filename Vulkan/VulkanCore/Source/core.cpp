@@ -335,7 +335,7 @@ void VulkanCore::CreateDevice()
 									(m_instanceVersion.Major > 1);
 
 	VkPhysicalDeviceVulkan12Features Features12 { 
-		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES 
+		// .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES 
 	};
 
 	void* pNextChain = &Features12;
