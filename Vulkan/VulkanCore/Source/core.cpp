@@ -360,6 +360,7 @@ void VulkanCore::CreateDevice()
 		Features12.descriptorBindingVariableDescriptorCount = VK_TRUE;
 		Features12.pNext = &Features13;
 	} else if (m_instanceVersion.Minor == 2 && DeviceSupportsDynamicRendering) {
+		printf("The Vulkan instance version is 2, and the device supports dynamic rendering.\n");
 		DevExts.push_back(VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME);
 		DevExts.push_back(VK_KHR_SYNCHRONIZATION_2_EXTENSION_NAME);
 
