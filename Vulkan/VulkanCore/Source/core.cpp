@@ -338,14 +338,39 @@ void VulkanCore::CreateDevice()
 		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES 
 	};
 
+	VkPhysicalDeviceVulkan13Features Features13{							// NDG 2026.10.21.15:15
+		.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES
+	};
+
+	/*
+		Notes: I pulled the above Features13 declaration statement out of the if statement below.
+
+		Motivation is an error stated here:
+
+			Debug callback: vkCreateDevice(): pCreateInfo->pNext chain includes a structure with unexpected VkStructureType VK_STRUCTURE_TYPE_APPLICATION_INFO.
+			pNext -> [VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO] -> [VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO] -> [VkPhysicalDeviceVulkan12Features] -> [VkApplicationInfo]
+	
+		I wasn't sure why I was getting the VkApplicationInfo struct assignment error, but I
+		discovered a thread about the same error.  The problem was that the variable was
+		going out of scope.  See here:
+		
+			https://stackoverflow.com/questions/79394903/vulkan-struct-includes-a-structure-with-unexpected-vkstructuretype
+
+		So I tried pulling the declaration of Features13 out of the if statement, and now I 
+		don't get the error!
+
+		So maybe it was an out of scope thing - but I'm not sure why.  If the variable was declared
+		INSIDE the if block, and then the Features12.pNext variable is set to the REFERENCE
+		of the Features13 variable, I would think that the memory location of the Features13
+		variable would not be altered or lost once the code execution point exits the if-block.
+
+		Very strage - interesting problem. I would be happy to hear a proper explanation...
+	*/
+
 	void* pNextChain = &Features12;
 
 	if (Instance_is_1_3_or_more && DeviceSupportsDynamicRendering) {
 		printf("The Vulkan instance and device support dynamic rendering as a core feature\n");
-
-		VkPhysicalDeviceVulkan13Features Features13{
-			.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES
-		};
 
 		Features13.synchronization2 = VK_TRUE;
 		Features13.dynamicRendering = VK_TRUE;
