@@ -80,14 +80,14 @@ public:
 			, OgldevVK::OGLDEV_VK_INIT_NONE
 		);
 		m_numImages							            = m_vkCore.GetNumImages();
-		m_pQueue 								    = m_vkCore.GetQueue();
+		m_pQueue 								        = m_vkCore.GetQueue();
 		CreateCommandBuffers();
 		RecordCommandBuffers();
 	}
 
 	void RenderScene()
 	{
-		u32				ImageIndex				    = m_pQueue->AcquireNextImage();
+		u32				            ImageIndex			= m_pQueue->AcquireNextImage();
 		
 		m_pQueue->SubmitAsync(m_cmdBufs[ImageIndex]);
 		
@@ -127,7 +127,7 @@ private:
 			);
 			
 			vkCmdClearColorImage(
-				m_cmdBufs[i]
+				  m_cmdBufs[i]
 				, m_vkCore.GetImage(i)
 				, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL
 				, &ClearColor
@@ -137,7 +137,7 @@ private:
 			
 			VkResult		        res				    = vkEndCommandBuffer(m_cmdBufs[i]);
 			CHECK_VK_RESULT(
-				res
+				  res
 				, "vkEndCommandBuffer\n"
 			);
 		}
@@ -146,7 +146,7 @@ private:
 	}
 	
 	OgldevVK::VulkanCore 			m_vkCore;
-	OgldevVK::VulkanQueue*			m_pQueue				    = NULL;
+	OgldevVK::VulkanQueue*			m_pQueue		    = NULL;
 	int					            m_numImages			= 0;
 	std::vector<VkCommandBuffer>	m_cmdBufs;
 };
