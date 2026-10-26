@@ -349,11 +349,11 @@ void VulkanCore::CreateDevice()
 
 			Debug callback: vkCreateDevice(): pCreateInfo->pNext chain includes a structure with unexpected VkStructureType VK_STRUCTURE_TYPE_APPLICATION_INFO.
 			pNext -> [VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO] -> [VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO] -> [VkPhysicalDeviceVulkan12Features] -> [VkApplicationInfo]
-	
+
 		I wasn't sure why I was getting the VkApplicationInfo struct assignment error, but I
 		discovered a thread about the same error.  The problem was that the variable was
 		going out of scope.  See here:
-		
+
 			https://stackoverflow.com/questions/79394903/vulkan-struct-includes-a-structure-with-unexpected-vkstructuretype
 
 		So I tried pulling the declaration of Features13 out of the if statement, and now I 
