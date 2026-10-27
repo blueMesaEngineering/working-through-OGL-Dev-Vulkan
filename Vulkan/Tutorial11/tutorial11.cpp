@@ -207,7 +207,7 @@ private:
 };
 
 
-#define 					        APP_NAME		    "Tutorial 10"
+#define 					        APP_NAME		    "Tutorial 11"
 
 int main(
 	  int argc
