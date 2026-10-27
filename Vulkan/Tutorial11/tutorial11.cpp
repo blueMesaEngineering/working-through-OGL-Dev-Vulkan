@@ -155,6 +155,19 @@ private:
 				, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT
 			);
 			
+			vkCmdPipelineBarrier(
+				  m_cmdBufs[i]
+				, VK_PIPELINE_STAGE_TRANSFER_BIT
+				, VK_PIPELINE_STAGE_TRANSFER_BIT
+				, 0						// dependency flags
+				, 0
+				, NULL						// memory barriers
+				, 0
+				, NULL						// buffer memory barriers
+				, 1
+				, &PresentToClearBarrier			// image memory barriers
+			);
+
 			vkCmdClearColorImage(
 				  m_cmdBufs[i]
 				, m_vkCore.GetImage(i)
@@ -164,6 +177,19 @@ private:
 				, &ImageRange
 			);
 			
+			vkCmdPipelineBarrier(
+				  m_cmdBufs[i]
+				, VK_PIPELINE_STAGE_TRANSFER_BIT
+				, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT
+				, 0
+				, 0
+				, NULL
+				, 0
+				, NULL
+				, 1
+				, &ClearToPresentBarrier
+			);
+
 			VkResult		        res				    = vkEndCommandBuffer(m_cmdBufs[i]);
 			CHECK_VK_RESULT(
 				  res
