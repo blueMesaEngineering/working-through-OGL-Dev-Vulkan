@@ -97,11 +97,11 @@ public:
 			, pWindow
 			, OgldevVK::OGLDEV_VK_INIT_NONE
 		);
-		m_device									= m_vkCore.GetDevice();
-		m_numImages							            	= m_vkCore.GetNumImages();
-		m_pQueue 								        = m_vkCore.GetQueue();
-		m_renderPass									= m_vkCore.CreateSimpleRenderPass();
-		m_frameBuffers									= m_vkCore.CreateFramebuffers(m_renderPass);
+		m_device							= m_vkCore.GetDevice();
+		m_numImages							= m_vkCore.GetNumImages();
+		m_pQueue 							= m_vkCore.GetQueue();
+		m_renderPass							= m_vkCore.CreateSimpleRenderPass();
+		m_frameBuffers							= m_vkCore.CreateFramebuffers(m_renderPass);
 		CreateCommandBuffers();
 		RecordCommandBuffers();
 		CreateShaders();
@@ -109,7 +109,7 @@ public:
 
 	void RenderScene()
 	{
-		u32				            ImageIndex			= m_pQueue->AcquireNextImage();
+		u32				            ImageIndex		= m_pQueue->AcquireNextImage();
 		
 		m_pQueue->SubmitAsync(m_cmdBufs[ImageIndex]);
 		
@@ -127,6 +127,21 @@ private:
 		
 		printf("Created command buffers\n");
 	}
+	
+	
+	void CreateShaders()
+	{
+		m_vs								= OgldevVK::CreateShaderModuleFromText(
+											  m_device
+											, "test.vert"
+										);
+										
+		m_fs								= OgldevVK::CreateShaderModuleFromText(
+											  m_device
+											, "test.vert"
+										);
+	}
+	
 	
 	void RecordCommandBuffers()
 	{
@@ -183,16 +198,20 @@ private:
 		printf("Command buffers recorded\n");
 	}
 	
+	GLFWwindow*				m_pWindow			= NULL;
 	OgldevVK::VulkanCore 			m_vkCore;
 	OgldevVK::VulkanQueue*			m_pQueue		    	= NULL;
+	VkDevice				m_device			= NULL;
 	int					m_numImages			= 0;
 	std::vector<VkCommandBuffer>		m_cmdBufs;
 	VkRenderPass				m_renderPass;
 	std::vector<VkFramebuffer>		m_frameBuffers;
+	VkShaderModule				m_vs;
+	VkShaderModule				m_fs;
 };
 
 
-#define 					        APP_NAME		    "Tutorial 12"
+#define 					        APP_NAME		    "Tutorial 13"
 
 int main(
 	  int argc
