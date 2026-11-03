@@ -7,7 +7,8 @@ check_vulkan_sdk
 CC=g++
 CPPFLAGS="-std=c++20 -I../VulkanCore/Include -I../../Include -I../../Include/assimp5 -I/home/nik/vulkanSDK/1.4.350.1/x86_64/include -DVULKAN -ggdb3"
 LDFLAGS=`pkg-config --libs glfw3 vulkan`
-LDFLAGS="$LDFLAGS -L$VULKAN_SDK/lib -lglslang -lglslang-default-resource-limits -lSPIRV -lOSDependent -l" + "spirv-opt --canonicalize-ids" \
+# LDFLAGS="$LDFLAGS -L$VULKAN_SDK/lib -lglslang -lglslang-default-resource-limits -lSPIRV -lOSDependent -l" + "spirv-opt --canonicalize-ids" \
+LDFLAGS="$LDFLAGS -L$VULKAN_SDK/lib -lglslang -lglslang-default-resource-limits -lSPIRV -lOSDependent -lSPVRemapper \
 	-lspirv-cross-reflect"
 
 $CC tutorial13.cpp \
