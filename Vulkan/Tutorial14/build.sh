@@ -12,7 +12,7 @@ LDFLAGS="$LDFLAGS -L$VULKAN_SDK/lib -lglslang -lglslang-default-resource-limits 
 # -lSPVRemapper \
 	# "-lspirv-cross-reflect"
 
-$CC tutorial13.cpp \
+$CC tutorial14.cpp \
     ../VulkanCore/Source/core.cpp \
     ../VulkanCore/Source/spirv_reflect.c \
     ../VulkanCore/Source/util.cpp \
@@ -24,4 +24,4 @@ $CC tutorial13.cpp \
     ../../Common/ogldev_util.cpp \
     ../../Common/3rdparty/stb_image.cpp \
     ../../Common/ogldev_etc_cubemap.cpp \
-    $CPPFLAGS $LDFLAGS -o tutorial13
+    $CPPFLAGS $LDFLAGS -o tutorial14
