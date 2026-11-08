@@ -138,7 +138,7 @@ private:
 										
 		m_fs								= OgldevVK::CreateShaderModuleFromText(
 											  m_device
-											, "test.vert"
+											, "test.frag"
 										);
 	}
 	
