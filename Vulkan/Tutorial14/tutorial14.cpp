@@ -78,7 +78,7 @@ public:
 			, m_fs
 			, NULL
 		);
-		delete 							m_pPipeline;
+		// delete 							m_pPipeline;
 		vkDestroyRenderPass(
 			  m_device
 			, m_renderPass
@@ -147,20 +147,21 @@ private:
 		// These are not really used in this tutorial.
 		// They are here for forward compatibility with the GraphicsPipeline interface
 		std::vector<OgldevVK::BufferAndMemory> 	UniformBuffers;
-		int UniformDataSize						= 0;
-		
-		m_pPipeline							= new OgldevVK::GraphicsPipeline(
-													m_device
-													, m_pWindow
-													, m_renderPass
-													, m_vs
-													, m_fs
-													, NULL
-													, m_numImages
-													, UniformBuffers
-													, UniformDataSize
-													, false
-												);
+		int UniformDataSize									= 0;
+		/*
+		m_pPipeline											= new OgldevVK::GraphicsPipeline(
+			m_device
+			, m_pWindow
+			, m_renderPass
+			, m_vs
+			, m_fs
+			, NULL
+			, m_numImages
+			, UniformBuffers
+			, UniformDataSize
+			, false
+		);
+		*/
 	}
 
 	void RecordCommandBuffers()
@@ -206,10 +207,10 @@ private:
 				, VK_SUBPASS_CONTENTS_INLINE
 			);
 
-			m_pPipeline->Bind(
-				  m_cmdBufs[i]
-				, i
-			);
+			// m_pPipeline->Bind(
+			// 	  m_cmdBufs[i]
+			// 	, i
+			// );
 
 			u32							VertexCount			= 3;
 			u32							InstanceCount		= 1;
