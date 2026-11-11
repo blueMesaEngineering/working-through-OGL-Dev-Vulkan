@@ -8,7 +8,7 @@ CC=g++
 CPPFLAGS="-I../VulkanCore/Include -I../../Include  -I$VULKAN_SDK/include -DVULKAN -ggdb3 -std=c++20"
 LDFLAGS=`pkg-config --libs glfw3 vulkan`
 LDFLAGS="$LDFLAGS -L$VULKAN_SDK/lib -lglslang -lglslang-default-resource-limits -lSPIRV -lOSDependent -lspirv-cross-reflect"
-$CC tutorial15.cpp \
+$CC tutorial16.cpp \
     ../VulkanCore/Source/core.cpp \
     ../VulkanCore/Source/spirv_reflect.c \
     ../VulkanCore/Source/util.cpp \
@@ -21,4 +21,4 @@ $CC tutorial15.cpp \
     ../../Common/ogldev_util.cpp  \
     ../../Common/3rdparty/stb_image.cpp \
     ../../Common/ogldev_etc_cubemap.cpp \
-    $CPPFLAGS $LDFLAGS -o tutorial15
+    $CPPFLAGS $LDFLAGS -o tutorial16
