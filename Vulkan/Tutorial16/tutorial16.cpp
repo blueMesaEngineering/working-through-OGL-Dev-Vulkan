@@ -16,7 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	Vulkan For Beginners - 
-		Tutorial #15: Vertex Buffers
+		Tutorial #16: Descriptor Sets
 */
 
 
