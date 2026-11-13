@@ -201,7 +201,7 @@ private:
 			, m_renderPass
 			, m_vs
 			, m_fs
-			, NULL
+			, &m_mesh
 			, m_numImages
 			, UniformBuffers
 			, UniformDataSize
