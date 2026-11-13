@@ -196,7 +196,7 @@ private:
 		int UniformDataSize									= 0;
 		
 		m_pPipeline											= new OgldevVK::GraphicsPipeline(
-			m_device
+			  m_device
 			, m_pWindow
 			, m_renderPass
 			, m_vs
@@ -263,19 +263,19 @@ private:
 			u32							FirstInstance		= 0;
 
 			vkCmdDraw(
-				  m_cmdBufs[i]
-				, VertexCount
-				, InstanceCount
-				, FirstVertex
-				, FirstInstance
+										  m_cmdBufs[i]
+										, VertexCount
+										, InstanceCount
+										, FirstVertex
+										, FirstInstance
 			);
 			
 			vkCmdEndRenderPass(m_cmdBufs[i]);
 
 			VkResult		        	res					= vkEndCommandBuffer(m_cmdBufs[i]);
 			CHECK_VK_RESULT(
-				  res
-				, "vkEndCommandBuffer\n"
+										  res
+										, "vkEndCommandBuffer\n"
 			);
 		}
 		
